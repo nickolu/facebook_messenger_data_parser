@@ -1,1 +1,5 @@
 mailboxes
+chat_data
+report_output
+__pycache__
+.vscode
