@@ -18,7 +18,8 @@ WEEKDAYS = [
 
 
 class BaseReport(object):
-    def __init__(self):
+    def __init__(self, reports_to_build=[], additional_logs=[], reports_to_run=[]):
+        self.user_data = {}
         self.unique_users = []
         self.oldest_message = None
         self.date_counts = {}
@@ -27,6 +28,7 @@ class BaseReport(object):
         self.words_per_user = {"total": 0}
         self.chars_per_user = {"total": 0}
         self.weekday_counts = {}
+        self.senders = []
 
         for day in WEEKDAYS:
             self.weekday_counts[day] = 0
@@ -34,29 +36,46 @@ class BaseReport(object):
         self.set_up_csvs_to_write()
 
     def set_up_csvs_to_write(self):
-        f = open("chats_per_user.csv", "w")
+        f = open("report_output/chats_per_user.csv", "w")
         f.close()
-        f = open("words_per_user.csv", "w")
+        f = open("report_output/words_per_user.csv", "w")
         f.close()
-        f = open("chars_per_user.csv", "w")
+        f = open("report_output/chars_per_user.csv", "w")
+        f.close()
+        f = open("report_output/user_data.csv", "w")
         f.close()
 
-    def write_chats_per_user_to_csv(self, file_name="chats_per_user.csv"):
+    def write_chats_per_user_to_csv(self, file_name="report_output/chats_per_user.csv"):
         f = open(file_name, "a")
-        for count in self.date_counts.items():
-            f.write("{}, {},\n".format(count[0], count[1]))
+        for user in self.chats_per_user.items():
+            f.write("{}, {},\n".format(user[0], user[1]))
         f.close()
 
-    def write_words_per_user_to_csv(self, file_name="words_per_user.csv"):
+    def write_words_per_user_to_csv(self, file_name="report_output/words_per_user.csv"):
         f = open(file_name, "a")
         for user in self.words_per_user.items():
             f.write("{}, {},\n".format(user[0], user[1]))
         f.close()
 
-    def write_chars_per_user_to_csv(self, file_name="characters_per_user.csv"):
+    def write_chars_per_user_to_csv(
+        self, file_name="report_output/characters_per_user.csv"
+    ):
         f = open(file_name, "a")
         for user in self.chars_per_user.items():
             f.write("{}, {},\n".format(user[0], user[1]))
+        f.close()
+
+    def write_user_data_to_csv(self, file_name="report_output/user_data.csv"):
+        f = open(file_name, "a")
+        for user in self.user_data:
+            f.write(
+                "{}, {}, {}, {}\n".format(
+                    user,
+                    self.user_data[user].get("message_count"),
+                    self.user_data[user].get("word_count"),
+                    len(self.user_data[user].get("unique_words")),
+                )
+            )
         f.close()
 
     def print_unique_users(self):

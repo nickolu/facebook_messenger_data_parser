@@ -12,9 +12,11 @@ idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10.3
 jmespath==0.9.5
+joblib==0.16.0
 mailbox==0.4
 MarkupSafe==1.1.1
 multidict==4.7.1
+nltk==3.5
 numpy==1.19.0
 pandas==1.0.5
 pathspec==0.6.0
@@ -29,6 +31,7 @@ rsa==3.4.2
 s3transfer==0.3.3
 six==1.13.0
 toml==0.10.0
+tqdm==4.47.0
 typed-ast==1.4.0
 urllib3==1.25.9
 virtualenv==16.7.9

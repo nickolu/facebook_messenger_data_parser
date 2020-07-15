@@ -22,14 +22,6 @@ class GmailMboxReport(BaseReport):
     def __init__(self, mbox_file_path):
         self.mailbox = mailbox.mbox(mbox_file_path)
 
-    def set_up_csvs_to_write(self):
-        f = open("chats_per_user.csv", "w")
-        f.close()
-        f = open("words_per_user.csv", "w")
-        f.close()
-        f = open("chars_per_user.csv", "w")
-        f.close()
-
     def run(self, reports_to_build=[], additional_logs=[], reports_to_run=[]):
         for key in self.mailbox.iterkeys():
             if key > BREAK_AFTER:
