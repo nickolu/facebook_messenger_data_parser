@@ -13,7 +13,7 @@ def log_sender(message):
 
 report = ChatReport()
 
-word_to_report = "wael"
+word_to_report = "d&d"
 
 
 def count_word(message):

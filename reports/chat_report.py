@@ -250,9 +250,13 @@ class ChatReport(BaseReport):
         items_to_print.sort(key=sort_func, reverse=True)
 
         print("counts for the word: {}".format(word))
+        total = 0
         for item in items_to_print:
             if item[1] > 0:
+                total += item[1]
                 print("{}: {} ({}%)".format(item[0], item[1], item[2]))
+        
+        print('total: {}'.format(total))
 
 
 def map_user(user_name):
