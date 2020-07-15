@@ -27,3 +27,11 @@ The report.run() method will iterate through any json files in those directories
 }
 ```
 
+
+## convert a raw hangouts json 
+
+If you have a raw hangouts json file from takeout.google.com, it will not be formatted like the above example. There is a function in this repo to convert it for you. To use it, first place the file in the hangouts json directory under chat_data like so: `chat_data/hangouts/Hangouts.json`
+
+Then, run the `simplify_hangouts_json_data` function in simplify_hangouts_json_data.py. The new file will also be placed in chat_data/hangouts/. Make sure to remove the original Hangouts.json otherwise the report runner will try to iterate that file and most likeley explode. You were warned!
+
+
